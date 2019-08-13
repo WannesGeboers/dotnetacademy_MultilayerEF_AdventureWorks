@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AdventureWorks2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="BusinessEntityID" />
+          </Key>
+          <Property Name="BusinessEntityID" Type="int" Nullable="false" />
+          <Property Name="PersonType" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="NameStyle" Type="bit" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="8" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Suffix" Type="nvarchar" MaxLength="10" />
+          <Property Name="EmailPromotion" Type="int" Nullable="false" />
+          <Property Name="AdditionalContactInfo" Type="xml" />
+          <Property Name="Demographics" Type="xml" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="PurchaseOrderID" />
+            <PropertyRef Name="PurchaseOrderDetailID" />
+          </Key>
+          <Property Name="PurchaseOrderID" Type="int" Nullable="false" />
+          <Property Name="PurchaseOrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="OrderQty" Type="smallint" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="LineTotal" Type="money" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ReceivedQty" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="RejectedQty" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="StockedQty" Type="decimal" Precision="9" Scale="2" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderHeader">
+          <Key>
+            <PropertyRef Name="PurchaseOrderID" />
+          </Key>
+          <Property Name="PurchaseOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RevisionNumber" Type="tinyint" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="VendorID" Type="int" Nullable="false" />
+          <Property Name="ShipMethodID" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="ShipDate" Type="datetime" />
+          <Property Name="SubTotal" Type="money" Nullable="false" />
+          <Property Name="TaxAmt" Type="money" Nullable="false" />
+          <Property Name="Freight" Type="money" Nullable="false" />
+          <Property Name="TotalDue" Type="money" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="int" />
+          <Property Name="StoreID" Type="int" />
+          <Property Name="TerritoryID" Type="int" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="10" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Customer_Person_PersonID">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="BusinessEntityID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID">
+          <End Role="PurchaseOrderHeader" Type="Self.PurchaseOrderHeader" Multiplicity="1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderHeader">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AdventureWorks2017ModelStoreContainer">
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="Person" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderDetail" EntityType="Self.PurchaseOrderDetail" Schema="Purchasing" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderHeader" EntityType="Self.PurchaseOrderHeader" Schema="Purchasing" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="Sales" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_Person_PersonID" Association="Self.FK_Customer_Person_PersonID">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID" Association="Self.FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID">
+            <End Role="PurchaseOrderHeader" EntitySet="PurchaseOrderHeader" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdventureWorks2017Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="BusinessEntityID" />
+          </Key>
+          <Property Name="BusinessEntityID" Type="Int32" Nullable="false" />
+          <Property Name="PersonType" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NameStyle" Type="Boolean" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Suffix" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EmailPromotion" Type="Int32" Nullable="false" />
+          <Property Name="AdditionalContactInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Demographics" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Person_PersonID" FromRole="Person" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="PurchaseOrderID" />
+            <PropertyRef Name="PurchaseOrderDetailID" />
+          </Key>
+          <Property Name="PurchaseOrderID" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseOrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderQty" Type="Int16" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="LineTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ReceivedQty" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="RejectedQty" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="StockedQty" Type="Decimal" Precision="9" Scale="2" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PurchaseOrderHeader" Relationship="Self.FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderHeader" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderHeader">
+          <Key>
+            <PropertyRef Name="PurchaseOrderID" />
+          </Key>
+          <Property Name="PurchaseOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RevisionNumber" Type="Byte" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="VendorID" Type="Int32" Nullable="false" />
+          <Property Name="ShipMethodID" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShipDate" Type="DateTime" Precision="3" />
+          <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TaxAmt" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalDue" Type="Decimal" Precision="19" Scale="4" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID" FromRole="PurchaseOrderHeader" ToRole="PurchaseOrderDetail" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int32" />
+          <Property Name="StoreID" Type="Int32" />
+          <Property Name="TerritoryID" Type="Int32" />
+          <Property Name="AccountNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Customer_Person_PersonID" FromRole="Customer" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Customer_Person_PersonID">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="BusinessEntityID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID">
+          <End Role="PurchaseOrderHeader" Type="Self.PurchaseOrderHeader" Multiplicity="1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderHeader">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AdventureWorks2017Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="PurchaseOrderDetails" EntityType="Self.PurchaseOrderDetail" />
+          <EntitySet Name="PurchaseOrderHeaders" EntityType="Self.PurchaseOrderHeader" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <AssociationSet Name="FK_Customer_Person_PersonID" Association="Self.FK_Customer_Person_PersonID">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID" Association="Self.FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID">
+            <End Role="PurchaseOrderHeader" EntitySet="PurchaseOrderHeaders" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AdventureWorks2017ModelStoreContainer" CdmEntityContainer="AdventureWorks2017Entities">
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="AdventureWorks2017Model.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="BusinessEntityID" ColumnName="BusinessEntityID" />
+                <ScalarProperty Name="PersonType" ColumnName="PersonType" />
+                <ScalarProperty Name="NameStyle" ColumnName="NameStyle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="EmailPromotion" ColumnName="EmailPromotion" />
+                <ScalarProperty Name="AdditionalContactInfo" ColumnName="AdditionalContactInfo" />
+                <ScalarProperty Name="Demographics" ColumnName="Demographics" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderDetails">
+            <EntityTypeMapping TypeName="AdventureWorks2017Model.PurchaseOrderDetail">
+              <MappingFragment StoreEntitySet="PurchaseOrderDetail">
+                <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+                <ScalarProperty Name="PurchaseOrderDetailID" ColumnName="PurchaseOrderDetailID" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
+                <ScalarProperty Name="ReceivedQty" ColumnName="ReceivedQty" />
+                <ScalarProperty Name="RejectedQty" ColumnName="RejectedQty" />
+                <ScalarProperty Name="StockedQty" ColumnName="StockedQty" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderHeaders">
+            <EntityTypeMapping TypeName="AdventureWorks2017Model.PurchaseOrderHeader">
+              <MappingFragment StoreEntitySet="PurchaseOrderHeader">
+                <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="ShipMethodID" ColumnName="ShipMethodID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="TotalDue" ColumnName="TotalDue" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="AdventureWorks2017Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

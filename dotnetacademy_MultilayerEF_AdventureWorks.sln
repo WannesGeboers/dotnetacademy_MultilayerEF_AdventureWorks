@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.BLL", "AdventureWorks.BLL\AdventureWorks.BLL.csproj", "{BB5921F6-D200-464C-93AC-19F3E54877FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.DAL", "AdventureWorks.DAL\AdventureWorks.DAL.csproj", "{8EBD150F-09D0-422C-AD03-42BF6E7E899D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorksWinForms.UI", "AdventureWorksWinForms.UI\AdventureWorksWinForms.UI.csproj", "{D9E78A4D-F3EC-4780-99CB-9C2E5CA94BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BB5921F6-D200-464C-93AC-19F3E54877FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB5921F6-D200-464C-93AC-19F3E54877FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5921F6-D200-464C-93AC-19F3E54877FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EBD150F-09D0-422C-AD03-42BF6E7E899D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBD150F-09D0-422C-AD03-42BF6E7E899D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBD150F-09D0-422C-AD03-42BF6E7E899D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBD150F-09D0-422C-AD03-42BF6E7E899D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9E78A4D-F3EC-4780-99CB-9C2E5CA94BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E78A4D-F3EC-4780-99CB-9C2E5CA94BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E78A4D-F3EC-4780-99CB-9C2E5CA94BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E78A4D-F3EC-4780-99CB-9C2E5CA94BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
