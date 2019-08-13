@@ -68,7 +68,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdventureWorks.edmx</DependentUpon>
     </Compile>
-    <Compile Include="AVContext.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>AdventureWorksContext.tt</DependentUpon>
     </Compile>
@@ -113,12 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AdventureWorks.BLL\AdventureWorks.BLL.csproj">
-      <Project>{BB5921F6-D200-464C-93AC-19F3E54877FB}</Project>
-      <Name>AdventureWorks.BLL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

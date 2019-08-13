@@ -29,9 +29,7 @@ namespace AdventureWorksWinForms.UI
                     "JOIN SALES.CUSTOMER ON PERSON.BUSINESSENTITYID = CUSTOMER.PERSONID ", sqlCon);
                 DataTable dtbl = new DataTable();
                 sqlda.Fill(dtbl);
-
-                dataGridView1.DataSource = dtbl;
-                
+                dataGridView1.DataSource = dtbl;                
             }
 
            

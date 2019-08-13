@@ -19,10 +19,15 @@ namespace AdventureWorks.DAL
         }
 
 
-        public PersonDTO GetFirst()
+        public List<Person> GetAll()
         {
-            Person allPersons = _context.People.First();
-            return Mapper.Map<PersonDTO>(allPersons); 
+            return _context.People.ToList();
+
+            //PersonDTO res = new PersonDTO
+            //{
+            //    FirstName = person.FirstName,
+            //    LastName = person.LastName
+            //};           
 
         }
 

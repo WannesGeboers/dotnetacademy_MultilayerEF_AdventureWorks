@@ -46,5 +46,11 @@
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureWorks.DAL\AdventureWorks.DAL.csproj">
+      <Project>{8ebd150f-09d0-422c-ad03-42bf6e7e899d}</Project>
+      <Name>AdventureWorks.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
