@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace AdventureWorksWinForms.UI
 {
     public partial class Form1 : Form
     {
+        string connectionString = @"Data Source=DESKTOP-IE9DG97;Initial Catalog = AdventureWorks2017; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Form1()
         {
             InitializeComponent();
@@ -19,12 +21,44 @@ namespace AdventureWorksWinForms.UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+                SqlDataAdapter sqlda = new SqlDataAdapter("" +
+                    "SELECT FIRSTNAME,LASTNAME, ACCOUNTNUMBER FROM PERSON.PERSON " +
+                    "JOIN SALES.CUSTOMER ON PERSON.BUSINESSENTITYID = CUSTOMER.PERSONID ", sqlCon);
+                DataTable dtbl = new DataTable();
+                sqlda.Fill(dtbl);
+
+                dataGridView1.DataSource = dtbl;
+                
+            }
+
+           
 
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void BtnHigher_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+         
+                    SqlDataAdapter sqlda = new SqlDataAdapter("" +
+                        "SELECT FIRSTNAME,LASTNAME, ACCOUNTNUMBER,TOTALDUE FROM PERSON.PERSON " +
+                        "JOIN SALES.CUSTOMER ON PERSON.BUSINESSENTITYID = CUSTOMER.PERSONID" +
+                        "JOIN SALES.SALESORDERHEADER ON CUSTOMER.PERSONID=SALESORDERHEADER.CUSTOMERID ", sqlCon);
+                    DataTable dtbl = new DataTable();
+                    sqlda.Fill(dtbl);
+
+                    dataGridView1.DataSource = dtbl;   
+
+            }
         }
     }
 }

@@ -51,7 +51,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 102;
             this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(1121, 368);
+            this.dataGridView1.Size = new System.Drawing.Size(1715, 908);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
@@ -89,7 +89,7 @@
             // 
             // btnAll
             // 
-            this.btnAll.Location = new System.Drawing.Point(1252, 106);
+            this.btnAll.Location = new System.Drawing.Point(1862, 106);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(218, 86);
             this.btnAll.TabIndex = 1;
@@ -99,16 +99,17 @@
             // 
             // btnHigher
             // 
-            this.btnHigher.Location = new System.Drawing.Point(1252, 221);
+            this.btnHigher.Location = new System.Drawing.Point(1862, 221);
             this.btnHigher.Name = "btnHigher";
             this.btnHigher.Size = new System.Drawing.Size(218, 86);
             this.btnHigher.TabIndex = 2;
             this.btnHigher.Text = "Higher then SumOfTotalDue";
             this.btnHigher.UseVisualStyleBackColor = true;
+            this.btnHigher.Click += new System.EventHandler(this.BtnHigher_Click);
             // 
             // btnLower
             // 
-            this.btnLower.Location = new System.Drawing.Point(1252, 342);
+            this.btnLower.Location = new System.Drawing.Point(1862, 342);
             this.btnLower.Name = "btnLower";
             this.btnLower.Size = new System.Drawing.Size(218, 86);
             this.btnLower.TabIndex = 3;
@@ -119,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1504, 556);
+            this.ClientSize = new System.Drawing.Size(2124, 1142);
             this.Controls.Add(this.btnLower);
             this.Controls.Add(this.btnHigher);
             this.Controls.Add(this.btnAll);

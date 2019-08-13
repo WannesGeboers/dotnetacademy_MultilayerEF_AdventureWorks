@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -69,6 +72,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>AdventureWorksContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerRepository.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>AdventureWorksContext.tt</DependentUpon>
@@ -109,6 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureWorks.BLL\AdventureWorks.BLL.csproj">
+      <Project>{BB5921F6-D200-464C-93AC-19F3E54877FB}</Project>
+      <Name>AdventureWorks.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

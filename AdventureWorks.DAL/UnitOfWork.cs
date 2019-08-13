@@ -9,18 +9,35 @@ namespace AdventureWorks.DAL
     public class UnitOfWork : IDisposable
     {
         private AVContext context = new AVContext();
-        private GenericRepository<Game> gameRepository;
-        public GenericRepository<Game> GameRepository
+        private GenericRepository<Customer> _customerRepository;
+        private GenericRepository<Person> _personRepository;
+
+        public GenericRepository<Customer> CustomerRepository
         {
             get
             {
-                return this.gameRepository ?? new GenericRepository<Game>(context);
+                return this._customerRepository ?? new GenericRepository<Customer>(context);
             }
         }
+
+
+        public GenericRepository<Person> PersonRepository
+        {
+            get
+            {
+                return this._personRepository ?? new GenericRepository<Person>(context);
+            }
+        }
+
+
+
+
         public void Save()
         {
             context.SaveChanges();
         }
+
+
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)
         {
