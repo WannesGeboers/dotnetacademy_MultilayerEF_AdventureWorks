@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureWorks.BLL.Services.interfaces
 {
-    public interface IPersonService
+    public interface IService
     {
         PersonDTO GetByID(int id);
         IQueryable<PersonDTO> GetAll();

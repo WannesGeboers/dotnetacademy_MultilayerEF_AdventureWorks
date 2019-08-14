@@ -64,6 +64,7 @@
     <Compile Include="Interfaces\IPersonRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="PersonRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesOrderHeader.cs" />
     <Compile Include="UnitOfWork.cs" />

@@ -115,11 +115,13 @@
             this.btnLower.TabIndex = 3;
             this.btnLower.Text = "Lower than SumOfTotalDue";
             this.btnLower.UseVisualStyleBackColor = true;
+            this.btnLower.Click += new System.EventHandler(this.BtnLower_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2124, 1142);
             this.Controls.Add(this.btnLower);
             this.Controls.Add(this.btnHigher);

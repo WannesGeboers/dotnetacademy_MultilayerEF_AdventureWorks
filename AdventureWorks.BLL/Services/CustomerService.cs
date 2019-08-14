@@ -1,4 +1,6 @@
-﻿using AdventureWorks.DAL;
+﻿using AdventureWorks.BLL.DTOs;
+using AdventureWorks.BLL.Services.interfaces;
+using AdventureWorks.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,27 +9,37 @@ using System.Threading.Tasks;
 
 namespace AdventureWorks.BLL
 {
-    public class CustomerService
+    public class CustomerService:IService
+
     {
-        private CustomerRepository _context { get; set; }
+        private readonly CustomerRepository _context;
 
         public CustomerService(CustomerRepository context)
         {
             _context = context;
         }
 
-        //public List<CustomerDTO> GetAll()
-        //{
-        //    //var allCustomers = _context.GetAll();
-        //    //foreach (var item in allCustomers)
-        //    //{
+  
+        public PersonDTO GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-        //    //}
-        //}
+        IQueryable<CustomerDTO> GetAll()
+        {
+            var allCustomers = _context.GetAll()
+                .Select(x=> new CustomerDTO
+                {
 
+                })
+                ;
 
+            return allCustomers;
+        }
 
-
-
+        IQueryable<PersonDTO> IService.GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

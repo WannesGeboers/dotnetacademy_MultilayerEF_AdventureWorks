@@ -14,9 +14,9 @@ namespace AdventureWorks.DAL
         }
 
 
-        public List<Person> GetAll()
+        public IQueryable GetAll()
         {
-            return _context.People.ToList();
+            return _context.People.Include("Person");
         }
 
     }

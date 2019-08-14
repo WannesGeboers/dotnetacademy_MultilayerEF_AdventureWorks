@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace AdventureWorks.BLL.Services
 {
-    public class PersonService:IPersonService
+    public class PersonService:IService
     {
-        private IPersonRepository _context { get; set; }
+        private readonly IPersonRepository _context;
         public PersonService(IPersonRepository context)
         {
             _context = context;
@@ -23,7 +23,8 @@ namespace AdventureWorks.BLL.Services
             var allPersons = _context.GetAll().Select(x => new PersonDTO
             {
                 FirstName = x.FirstName,
-                LastName = x.LastName
+                LastName = x.LastName,
+                AccountNumber = ""
             });
             return allPersons;
         }
