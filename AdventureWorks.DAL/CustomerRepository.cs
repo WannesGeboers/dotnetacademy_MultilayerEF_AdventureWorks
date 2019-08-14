@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using AdventureWorks.DAL.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventureWorks.DAL
 {
-    public class CustomerRepository
+    public class CustomerRepository:ICustomerRepository
     {
         private AWContext _context {get;set;}
 
@@ -14,10 +15,19 @@ namespace AdventureWorks.DAL
         }
 
 
-        public IQueryable GetAll()
+        //public IQueryable GetAll()
+        //{
+        //    
+        //}
+
+        public Customer GetByID(int id)
         {
-            return _context.People.Include("Person");
+            throw new System.NotImplementedException();
         }
 
+        public IQueryable<Customer> GetAll()
+        {
+            return _context.Customers.Include("Person");
+        }
     }
 }

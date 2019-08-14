@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdventureWorks.BLL.Services
 {
-    public class PersonService:IService
+    public class PersonService:IPersonService
     {
         private readonly IPersonRepository _context;
         public PersonService(IPersonRepository context)

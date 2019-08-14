@@ -41,6 +41,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FirstName,
@@ -49,6 +50,7 @@
             this.SumOfTotalDue});
             this.dataGridView1.Location = new System.Drawing.Point(108, 106);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersWidth = 102;
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(1715, 908);
@@ -61,7 +63,7 @@
             this.FirstName.HeaderText = "FirstName";
             this.FirstName.MinimumWidth = 12;
             this.FirstName.Name = "FirstName";
-            this.FirstName.Width = 250;
+            this.FirstName.Width = 199;
             // 
             // LastName
             // 
@@ -69,7 +71,7 @@
             this.LastName.HeaderText = "LastName";
             this.LastName.MinimumWidth = 12;
             this.LastName.Name = "LastName";
-            this.LastName.Width = 250;
+            this.LastName.Width = 198;
             // 
             // AccountNumber
             // 
@@ -77,7 +79,7 @@
             this.AccountNumber.HeaderText = "AccountNumber";
             this.AccountNumber.MinimumWidth = 12;
             this.AccountNumber.Name = "AccountNumber";
-            this.AccountNumber.Width = 250;
+            this.AccountNumber.Width = 272;
             // 
             // SumOfTotalDue
             // 
@@ -85,7 +87,7 @@
             this.SumOfTotalDue.HeaderText = "SumOfTotalDue";
             this.SumOfTotalDue.MinimumWidth = 12;
             this.SumOfTotalDue.Name = "SumOfTotalDue";
-            this.SumOfTotalDue.Width = 250;
+            this.SumOfTotalDue.Width = 273;
             // 
             // btnAll
             // 

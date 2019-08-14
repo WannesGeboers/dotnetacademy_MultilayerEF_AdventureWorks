@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace AdventureWorks.BLL
 {
     public class CustomerDTO
-    {
-        public int CustomerID { get; set; }
-        public Nullable<int> PersonID { get; set; }
-        public Nullable<int> StoreID { get; set; }
-        public Nullable<int> TerritoryID { get; set; }
-        public string AccountNumber { get; set; }       
+    {      
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string AccountNumber { get; set; }
+        public decimal SumOfTotalDue { get; set; }
+     
     }
 }

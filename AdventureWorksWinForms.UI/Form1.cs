@@ -1,4 +1,5 @@
-﻿using AdventureWorks.BLL.Services;
+﻿using AdventureWorks.BLL;
+using AdventureWorks.BLL.Services;
 using AdventureWorks.BLL.Services.interfaces;
 using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
@@ -12,14 +13,17 @@ namespace AdventureWorksWinForms.UI
     public partial class Form1 : Form
     {
         string connectionString = @"Data Source=DESKTOP-IE9DG97;Initial Catalog = AdventureWorks2017; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly IService _service;
+        private readonly IPersonService _service;
+        private readonly ICustomerService _customerService;
 
         public Form1()
         {
             InitializeComponent();
             var context = new AWContext();
             IPersonRepository personRepository = new PersonRepository(context);
-            _service = new PersonService(personRepository);
+            ICustomerRepository customerRepository = new CustomerRepository(context);
+            //_service = new PersonService(personRepository);
+            _customerService = new CustomerService(customerRepository);
         }
         
                 //autofac
@@ -27,8 +31,8 @@ namespace AdventureWorksWinForms.UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var customer = _service.GetAll().First();
-            dataGridView1.DataSource = _service.GetAll().ToList();
+            var customer = _customerService.GetAll().First();
+            dataGridView1.DataSource = _customerService.GetAll().ToList();
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -38,16 +42,19 @@ namespace AdventureWorksWinForms.UI
 
         private void BtnHigher_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _service.GetAll()
+            dataGridView1.DataSource = _customerService.GetAll()
                 .OrderBy(x=>x.FirstName)
                 .ToList();
         }
 
         private void BtnLower_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _service.GetAll()
+            dataGridView1.DataSource = _customerService.GetAll()
     .OrderBy(x => x.LastName)
     .ToList();
         }
+
+
+
     }
 }
