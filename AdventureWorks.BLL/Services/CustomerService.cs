@@ -11,18 +11,19 @@ namespace AdventureWorks.BLL
     {
         private CustomerRepository _context { get; set; }
 
-
         public CustomerService(CustomerRepository context)
         {
             _context = context;
         }
 
-        public List<CustomerDTO> GetAll()
-        {
-            var x = _context.GetAll();
-                       
-            
-        }
+        //public List<CustomerDTO> GetAll()
+        //{
+        //    //var allCustomers = _context.GetAll();
+        //    //foreach (var item in allCustomers)
+        //    //{
+
+        //    //}
+        //}
 
         //public List<CustomerDTO> GetAllCustomers()
         //{
@@ -31,5 +32,8 @@ namespace AdventureWorks.BLL
         //    {AccountNumber
         //        x.)
         //}
+
+
+
     }
 }

@@ -95,7 +95,6 @@
     <None Include="AdventureWorks.edmx.diagram">
       <DependentUpon>AdventureWorks.edmx</DependentUpon>
     </None>
-    <None Include="App.Config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

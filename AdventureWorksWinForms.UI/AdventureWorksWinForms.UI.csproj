@@ -77,9 +77,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AdventureWorks.BLL\AdventureWorks.BLL.csproj">
       <Project>{bb5921f6-d200-464c-93ac-19f3e54877fb}</Project>
       <Name>AdventureWorks.BLL</Name>

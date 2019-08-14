@@ -10,9 +10,9 @@ namespace AdventureWorks.DAL
 {
     public class GenericRepository<TEntity> where TEntity : class
     {
-        internal AVContext context;
+        internal AdventureWorks2017Entities context;
         internal DbSet<TEntity> dbSet;
-        public GenericRepository(AVContext context)
+        public GenericRepository(AdventureWorks2017Entities context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

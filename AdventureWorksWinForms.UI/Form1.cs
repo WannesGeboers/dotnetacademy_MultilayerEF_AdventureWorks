@@ -21,19 +21,16 @@ namespace AdventureWorksWinForms.UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            using (SqlConnection sqlCon = new SqlConnection(connectionString))
-            {
-                sqlCon.Open();
-                SqlDataAdapter sqlda = new SqlDataAdapter("" +
-                    "SELECT FIRSTNAME,LASTNAME, ACCOUNTNUMBER FROM PERSON.PERSON " +
-                    "JOIN SALES.CUSTOMER ON PERSON.BUSINESSENTITYID = CUSTOMER.PERSONID ", sqlCon);
-                DataTable dtbl = new DataTable();
-                sqlda.Fill(dtbl);
-                dataGridView1.DataSource = dtbl;                
-            }
-
-           
-
+            //using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            //{
+            //    sqlCon.Open();
+            //    SqlDataAdapter sqlda = new SqlDataAdapter("" +
+            //        "SELECT FIRSTNAME,LASTNAME, ACCOUNTNUMBER FROM PERSON.PERSON " +
+            //        "JOIN SALES.CUSTOMER ON PERSON.BUSINESSENTITYID = CUSTOMER.PERSONID ", sqlCon);
+            //    DataTable dtbl = new DataTable();
+            //    sqlda.Fill(dtbl);
+            //    dataGridView1.DataSource = dtbl;
+            //}
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -54,8 +51,7 @@ namespace AdventureWorksWinForms.UI
                     DataTable dtbl = new DataTable();
                     sqlda.Fill(dtbl);
 
-                    dataGridView1.DataSource = dtbl;   
-
+                    dataGridView1.DataSource = dtbl;
             }
         }
     }

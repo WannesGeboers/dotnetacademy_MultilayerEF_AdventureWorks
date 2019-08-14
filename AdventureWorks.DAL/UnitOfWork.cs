@@ -8,7 +8,7 @@ namespace AdventureWorks.DAL
 {
     public class UnitOfWork : IDisposable
     {
-        private AVContext context = new AVContext();
+        private AdventureWorks2017Entities _context;
         private GenericRepository<Customer> _customerRepository;
         private GenericRepository<Person> _personRepository;
 
@@ -16,7 +16,7 @@ namespace AdventureWorks.DAL
         {
             get
             {
-                return this._customerRepository ?? new GenericRepository<Customer>(context);
+                return this._customerRepository ?? new GenericRepository<Customer>(_context);
             }
         }
 
@@ -25,16 +25,19 @@ namespace AdventureWorks.DAL
         {
             get
             {
-                return this._personRepository ?? new GenericRepository<Person>(context);
+                return this._personRepository ?? new GenericRepository<Person>(_context);
             }
         }
 
-
+        public UnitOfWork(AdventureWorks2017Entities context)
+        {
+            _context = context;
+        }
 
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
 
@@ -45,7 +48,7 @@ namespace AdventureWorks.DAL
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
             this.disposed = true;
