@@ -25,13 +25,7 @@ namespace AdventureWorks.BLL
         //    //}
         //}
 
-        //public List<CustomerDTO> GetAllCustomers()
-        //{
-        //    var x = _context.GetAll();
-        //    x.Select(x=> new CustomerDTO
-        //    {AccountNumber
-        //        x.)
-        //}
+
 
 
 

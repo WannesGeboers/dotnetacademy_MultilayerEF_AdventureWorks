@@ -66,6 +66,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,6 +82,10 @@
     <ProjectReference Include="..\AdventureWorks.BLL\AdventureWorks.BLL.csproj">
       <Project>{bb5921f6-d200-464c-93ac-19f3e54877fb}</Project>
       <Name>AdventureWorks.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdventureWorks.DAL\AdventureWorks.DAL.csproj">
+      <Project>{8EBD150F-09D0-422C-AD03-42BF6E7E899D}</Project>
+      <Name>AdventureWorks.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

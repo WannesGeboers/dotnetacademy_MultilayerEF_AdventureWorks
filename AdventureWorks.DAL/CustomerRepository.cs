@@ -5,10 +5,10 @@ namespace AdventureWorks.DAL
 {
     public class CustomerRepository
     {
-        private AdventureWorks2017Entities _context {get;set;}
+        private AWContext _context {get;set;}
 
 
-        public CustomerRepository(AdventureWorks2017Entities context)
+        public CustomerRepository(AWContext context)
         {
             _context = context;
         }
@@ -17,13 +17,6 @@ namespace AdventureWorks.DAL
         public List<Person> GetAll()
         {
             return _context.People.ToList();
-
-            //PersonDTO res = new PersonDTO
-            //{
-            //    FirstName = person.FirstName,
-            //    LastName = person.LastName
-            //};           
-
         }
 
     }

@@ -53,61 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdventureWorksContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdventureWorksContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AdventureWorksContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdventureWorksContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AdventureWorks.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdventureWorks.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>AdventureWorksContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="AWContext.cs" />
+    <Compile Include="BusinessEntity.cs" />
+    <Compile Include="BusinessEntityAddress.cs" />
+    <Compile Include="BusinessEntityContact.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="GenericRepository.cs" />
-    <Compile Include="Person.cs">
-      <DependentUpon>AdventureWorksContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Interfaces\IPersonRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseOrderDetail.cs">
-      <DependentUpon>AdventureWorksContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PurchaseOrderHeader.cs">
-      <DependentUpon>AdventureWorksContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="SalesOrderHeader.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="AdventureWorks.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AdventureWorks.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="AdventureWorks.edmx.diagram">
-      <DependentUpon>AdventureWorks.edmx</DependentUpon>
-    </None>
+    <None Include="App.Config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="AdventureWorksContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AdventureWorksContext.Context.cs</LastGenOutput>
-      <DependentUpon>AdventureWorks.edmx</DependentUpon>
-    </Content>
-    <Content Include="AdventureWorksContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AdventureWorks.edmx</DependentUpon>
-      <LastGenOutput>AdventureWorksContext.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventureWorks.DAL
 {
     public class UnitOfWork : IDisposable
     {
-        private AdventureWorks2017Entities _context;
+        private AWContext _context;
         private GenericRepository<Customer> _customerRepository;
         private GenericRepository<Person> _personRepository;
 
@@ -29,7 +25,7 @@ namespace AdventureWorks.DAL
             }
         }
 
-        public UnitOfWork(AdventureWorks2017Entities context)
+        public UnitOfWork(AWContext context)
         {
             _context = context;
         }

@@ -1,18 +1,17 @@
-﻿using System;
+﻿using AdventureWorks.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventureWorks.DAL
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal AdventureWorks2017Entities context;
+        internal DbContext context;
         internal DbSet<TEntity> dbSet;
-        public GenericRepository(AdventureWorks2017Entities context)
+        public GenericRepository(DbContext context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
@@ -66,6 +65,21 @@ namespace AdventureWorks.DAL
         {
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
+        }
+
+        public TEntity GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TEntity> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
