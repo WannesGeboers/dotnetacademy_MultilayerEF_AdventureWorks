@@ -1,5 +1,4 @@
 ﻿using AdventureWorks.BLL;
-using AdventureWorks.BLL.Services;
 using AdventureWorks.BLL.Services.interfaces;
 using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
@@ -25,8 +24,8 @@ namespace AdventureWorksWinForms.UI
             //_service = new PersonService(personRepository);
             _customerService = new CustomerService(customerRepository);
         }
-        
-                //autofac
+
+        //autofac
 
 
         private void Button1_Click(object sender, EventArgs e)
@@ -43,7 +42,7 @@ namespace AdventureWorksWinForms.UI
         private void BtnHigher_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = _customerService.GetAll()
-                .OrderBy(x=>x.FirstName)
+                .OrderBy(x => x.FirstName)
                 .ToList();
         }
 

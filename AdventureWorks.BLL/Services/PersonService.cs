@@ -1,16 +1,11 @@
 ﻿using AdventureWorks.BLL.DTOs;
 using AdventureWorks.BLL.Services.interfaces;
-using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventureWorks.BLL.Services
 {
-    public class PersonService:IPersonService
+    public class PersonService : IPersonService
     {
         private readonly IPersonRepository _context;
         public PersonService(IPersonRepository context)
@@ -35,7 +30,8 @@ namespace AdventureWorks.BLL.Services
             return new PersonDTO
             {
                 FirstName = person.FirstName
-                ,LastName = person.LastName
+                ,
+                LastName = person.LastName
             };
         }
 

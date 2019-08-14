@@ -1,12 +1,11 @@
 ﻿using AdventureWorks.DAL.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventureWorks.DAL
 {
-    public class CustomerRepository:ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
-        private AWContext _context {get;set;}
+        private AWContext _context { get; set; }
 
 
         public CustomerRepository(AWContext context)
