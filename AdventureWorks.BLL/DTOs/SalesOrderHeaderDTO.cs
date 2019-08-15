@@ -1,4 +1,6 @@
-﻿namespace AdventureWorks.BLL.DTOs
+﻿using AdventureWorks.DAL;
+
+namespace AdventureWorks.BLL.DTOs
 {
     public class SalesOrderHeaderDTO
     {

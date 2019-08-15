@@ -1,4 +1,5 @@
 ﻿using AdventureWorks.DAL.Interfaces;
+using System;
 using System.Linq;
 
 namespace AdventureWorks.DAL
@@ -9,7 +10,7 @@ namespace AdventureWorks.DAL
         private readonly AWContext _context;
         public PersonRepository(AWContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
 
