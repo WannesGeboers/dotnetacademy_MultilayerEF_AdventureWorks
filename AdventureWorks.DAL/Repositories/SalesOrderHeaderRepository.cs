@@ -1,4 +1,5 @@
 ﻿using AdventureWorks.DAL.Interfaces;
+using System;
 using System.Linq;
 
 namespace AdventureWorks.DAL.Repositories
@@ -9,7 +10,7 @@ namespace AdventureWorks.DAL.Repositories
 
         public SalesOrderHeaderRepository(ISalesOrderHeaderRepository context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         public IQueryable<SalesOrderHeader> GetAll()
         {

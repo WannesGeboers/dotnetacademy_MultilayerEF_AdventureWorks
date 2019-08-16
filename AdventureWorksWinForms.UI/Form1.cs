@@ -19,6 +19,9 @@ namespace AdventureWorksWinForms.UI
         {
             InitializeComponent();
             var context = new AWContext();
+            IGenericRepository <Person> personRepository2 = new GenericRepository<Person>(context);
+
+
             IPersonRepository personRepository = new PersonRepository(context);
             ICustomerRepository customerRepository = new CustomerRepository(context);
             //_service = new PersonService(personRepository);

@@ -9,19 +9,18 @@ namespace AdventureWorks.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal DbContext context;
-        internal DbSet<TEntity> dbSet;
+        private readonly DbContext _context;
+      
         public GenericRepository(DbContext context)
         {
-            this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = dbSet;
+            IQueryable<TEntity> query = _context.Set<TEntity>();
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -42,29 +41,29 @@ namespace AdventureWorks.DAL
         }
         public virtual TEntity GetByID(object id)
         {
-            return dbSet.Find(id);
+            return _context.Set<TEntity>().Find(id);
         }
         public virtual void Insert(TEntity entity)
         {
-            dbSet.Add(entity);
+            _context.Set<TEntity>().Add(entity);
         }
         public virtual void Delete(object id)
         {
-            TEntity entityToDelete = dbSet.Find(id);
+            TEntity entityToDelete = _context.Set<TEntity>().Find(id);
             Delete(entityToDelete);
         }
         public virtual void Delete(TEntity entityToDelete)
         {
-            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            if (_context.Set<TEntity>().Entry(entityToDelete).State == EntityState.Detached)
             {
-                dbSet.Attach(entityToDelete);
+                _context.Set<TEntity>().Attach(entityToDelete);
             }
-            dbSet.Remove(entityToDelete);
+            _context.Set<TEntity>().Remove(entityToDelete);
         }
         public virtual void Update(TEntity entityToUpdate)
         {
-            dbSet.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
+            _context.Set<TEntity>().Attach(entityToUpdate);
+            _context.Set<TEntity>().Entry(entityToUpdate).State = EntityState.Modified;
         }
 
         public TEntity GetById(int id)
