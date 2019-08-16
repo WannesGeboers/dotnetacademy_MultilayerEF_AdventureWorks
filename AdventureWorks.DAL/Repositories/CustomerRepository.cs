@@ -1,5 +1,6 @@
 ﻿using AdventureWorks.DAL.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventureWorks.DAL
@@ -27,7 +28,9 @@ namespace AdventureWorks.DAL
 
         public IQueryable<Customer> GetAll()
         {
-            return _context.Customers.Include("Person");
+            var customers = _context.Customers.Include("Person").Include("SalesOrderHeaders");
+            
+            return customers;
         }
     }
 }

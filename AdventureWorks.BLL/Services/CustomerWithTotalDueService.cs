@@ -1,5 +1,6 @@
 ﻿using AdventureWorks.BLL.DTOs;
 using AdventureWorks.BLL.Services.interfaces;
+using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,20 +21,7 @@ namespace AdventureWorks.BLL.Services
             _customerRepository = customerRepository;
             _salesOrderHeaderRepository = salesOrderHeaderRepository;
         }
-        public IEnumerable<CustomerWithTotalDueDTO> GetAll()
-        {
-            var allCustomersWithTotalDue = _customerRepository.GetAll()
-                                        .Select(x => new CustomerWithTotalDueDTO
-                                        {
-                                            FirstName = x.Person.FirstName,
-                                            LastName = x.Person.LastName,
-                                            AccountNumber = x.AccountNumber,
-                                            SumOfTotalDue = CalculateTotalDue(x.CustomerID)
-                                        });
-                                       
-            return allCustomersWithTotalDue.AsEnumerable();
 
-        }
 
         public CustomerWithTotalDueDTO GetByID(int id)
         {
@@ -41,10 +29,28 @@ namespace AdventureWorks.BLL.Services
         }
 
 
-        private decimal CalculateTotalDue(int id)
+        private decimal CalculateTotalDue(Customer c)
         {
-            return _salesOrderHeaderRepository.TotalDueByCustomerID(id);
+            decimal res = 0;
+            foreach (var item in c.SalesOrderHeaders)
+            {
+                res += item.TotalDue;
+            }
+            return res;          
         }
 
+        IQueryable<CustomerWithTotalDueDTO> ICustomerWithTotalDueService.GetAll()
+        {
+            var allCustomersWithTotalDue = _customerRepository.GetAll()
+                            .Select(x => new CustomerWithTotalDueDTO
+                            {
+                                FirstName = x.Person.FirstName,
+                                LastName = x.Person.LastName,
+                                AccountNumber = x.AccountNumber,
+                                SumOfTotalDue = CalculateTotalDue(x)
+                            });
+
+            return allCustomersWithTotalDue;
+        }
     }
 }

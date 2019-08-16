@@ -1,8 +1,10 @@
 ﻿using AdventureWorks.BLL;
+using AdventureWorks.BLL.DTOs;
 using AdventureWorks.BLL.Services.interfaces;
 using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,51 +14,135 @@ namespace AdventureWorksWinForms.UI
     public partial class Form1 : Form
     {
         //string connectionString = @"Data Source=DESKTOP-IE9DG97;Initial Catalog = AdventureWorks2017; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly IPersonService _service;
-        private readonly ICustomerService _customerService;
+
+        private ICustomerService _customerService;
+        private IEnumerable<CustomerWithTotalDueDTO> _data;
 
         public Form1()
         {
             InitializeComponent();
-            var context = new AWContext();
-            IGenericRepository <Person> personRepository2 = new GenericRepository<Person>(context);
+            InitialLoadApplication();
+            LoadStartData();
+            LoadComboBox();
+        }
 
-
-            IPersonRepository personRepository = new PersonRepository(context);
+        private void InitialLoadApplication()
+        {
+            var context = new AWContext();               
             ICustomerRepository customerRepository = new CustomerRepository(context);
-            //_service = new PersonService(personRepository);
             _customerService = new CustomerService(customerRepository);
         }
+
+        private void LoadStartData()
+        {
+            var data = _customerService.GetAllCustomersWithTotalDue();
+            DisplayData(data);
+        }
+
+        private void LoadComboBox()
+        {
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.DataSource = dataGridView1.Columns;
+            comboBox1.DisplayMember = "HeaderText";
+        }
+
+
+        private void DisplayData(IEnumerable<CustomerWithTotalDueDTO> data)
+        {
+            //1.clear items
+            //2. add source
+            //3. add rowNumbers
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = data;
+            GiveRowNumber(dataGridView1);
+        }
+
 
         //autofac
 
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void GiveRowNumber(DataGridView dgv)
         {
-            var customer = _customerService.GetAll().First();
-            dataGridView1.DataSource = _customerService.GetAll().ToList();
+            foreach (DataGridViewRow row in dgv.Rows)
+                row.HeaderCell.Value = (row.Index + 1).ToString();
         }
+
+
+        private void Button1_Click(object sender, EventArgs e)
+        {           
+            DisplayData(_data);
+
+        }
+
+        private void Button1_Click_1(object sender, EventArgs e)
+        {
+            string text = textBox1.Text;
+
+            if (string.IsNullOrEmpty(text)==true)
+            {
+                var data = _customerService.GetAllCustomersWithTotalDue();
+                DisplayData(data);
+            }
+            else
+            {
+                //selected in combobox
+                var selectedComboValue = comboBox1.Text;
+                if (selectedComboValue.Equals("SumOfTotalDue") == true)
+                {
+                    char first = text[0];
+                    if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
+                    {
+                        var numbTest = text.Replace(first.ToString(), "").Trim();
+                        if (decimal.TryParse(numbTest, out decimal result) == true)
+                        {
+                            var data = _customerService.GetByTotalDue(first, result);
+                            DisplayData(data);
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            }
+
+
+            
+
+            
+
+        }
+
+
+        private void BtnHigher_Click(object sender, EventArgs e)
+        {
+            var data = _customerService.GetAllCustomersAverage('>');
+            DisplayData(data); 
+        }
+
+        private void BtnLower_Click(object sender, EventArgs e)
+        {
+          var data = _customerService.GetAllCustomersAverage('<');
+          DisplayData(data);
+        }
+
+
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
-        private void BtnHigher_Click(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = _customerService.GetAll()
-                .OrderBy(x => x.FirstName)
-                .ToList();
-        }
-
-        private void BtnLower_Click(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = _customerService.GetAll()
-    .OrderBy(x => x.LastName)
-    .ToList();
-        }
-
-
-
     }
 }
