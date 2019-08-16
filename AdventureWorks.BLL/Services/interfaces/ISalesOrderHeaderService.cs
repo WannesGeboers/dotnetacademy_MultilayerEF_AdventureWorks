@@ -7,6 +7,5 @@ namespace AdventureWorks.BLL.Services.interfaces
     {
         SalesOrderHeaderDTO GetByID(int id);
         IQueryable<SalesOrderHeaderDTO> GetAll();
-
     }
 }

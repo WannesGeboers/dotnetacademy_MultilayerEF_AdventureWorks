@@ -18,8 +18,7 @@ namespace AdventureWorks.BLL.Services
             var allPersons = _context.GetAll().Select(x => new PersonDTO
             {
                 FirstName = x.FirstName,
-                LastName = x.LastName,
-                AccountNumber = ""
+                LastName = x.LastName              
             });
             return allPersons;
         }

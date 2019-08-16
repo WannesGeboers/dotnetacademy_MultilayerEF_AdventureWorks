@@ -6,5 +6,6 @@ namespace AdventureWorks.DAL.Interfaces
     {
         SalesOrderHeader GetByID(int id);
         IQueryable<SalesOrderHeader> GetAll();
+        decimal TotalDueByCustomerID(int id);
     }
 }

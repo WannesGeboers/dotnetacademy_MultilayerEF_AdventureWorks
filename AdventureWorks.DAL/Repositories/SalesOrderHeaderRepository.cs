@@ -26,5 +26,13 @@ namespace AdventureWorks.DAL.Repositories
         {
             return _context.GetByID(id);
         }
+
+        public decimal TotalDueByCustomerID(int id)
+        {
+            return _context.GetAll()
+                .Where(x => x.CustomerID == id)
+                .Select(x => x.TotalDue)
+                .Sum();
+        }
     }
 }
