@@ -48,12 +48,9 @@
     <Compile Include="DTOs\SalesOrderHeaderDTO.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CustomerWithTotalDueService.cs" />
     <Compile Include="Services\interfaces\ICustomerService.cs" />
-    <Compile Include="Services\interfaces\ICustomerWithTotalDueService.cs" />
     <Compile Include="Services\interfaces\IPersonService.cs" />
     <Compile Include="Services\interfaces\ISalesOrderHeaderService.cs" />
-    <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\SalesOrderHeaderService.cs" />
   </ItemGroup>
   <ItemGroup>

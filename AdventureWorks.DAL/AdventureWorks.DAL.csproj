@@ -61,7 +61,6 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IPersonRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISalesOrderHeaderRepository.cs" />
     <Compile Include="Repositories\SalesOrderHeaderRepository.cs" />
     <Compile Include="Entities\Person.cs" />

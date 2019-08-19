@@ -2,7 +2,6 @@
 using AdventureWorks.BLL.Services.interfaces;
 using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,8 +49,8 @@ namespace AdventureWorks.BLL
             var allCustomersWithTotalDue = _context.GetAll()
                  .Select(x => new CustomerWithTotalDueDTO
                  {
-                     FirstName = x.Person != null ? x.Person.FirstName : "",
-                     LastName = x.Person != null ? x.Person.LastName : "",
+                     FirstName = x.Person != null ? x.Person.FirstName : "unknown",
+                     LastName = x.Person != null ? x.Person.LastName : "unknown",
                      AccountNumber = x.AccountNumber,
                      SumOfTotalDue = //CalculateTotalDue(x)
                      x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
@@ -65,12 +64,16 @@ namespace AdventureWorks.BLL
             var data = _context.GetAll().AsEnumerable();
             var average = data.Sum(x => x.SalesOrderHeaders.Sum(y => y.TotalDue)) / data.Sum(x => x.SalesOrderHeaders.Count);
 
+            //data builder
+
             data = data.Where(x => x.Person != null);
 
+            //button lower
             if (c.Equals('<'))
             {
                 data = data.Where(x => x.SalesOrderHeaders.Sum(y => y.TotalDue) < average);
             }
+            //button higher
             if (c.Equals('>'))
             {
                 data = data.Where(x => x.SalesOrderHeaders.Sum(y => y.TotalDue) > average);
@@ -121,18 +124,10 @@ namespace AdventureWorks.BLL
             return resultDTO;
         }
 
-
-
-        public decimal CalculateTotalDue(Customer c)
-        {
-            decimal sum = c.SalesOrderHeaders.Count != 0 ? (decimal)c.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0;
-            return sum;
-        }
-
         IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterByFirstName(string name)
         {
-            var listCustomersDTO = _context.GetAll()
-                  .Where(x => x.Person.FirstName.Contains(name))
+            
+            var listCustomersDTO = _context.FilterByFirstName(name)
                   .Select(x => new CustomerWithTotalDueDTO
                   {
                       FirstName = x.Person.FirstName,
@@ -148,8 +143,7 @@ namespace AdventureWorks.BLL
 
         IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterByLastName(string name)
         {
-            var listCustomersDTO = _context.GetAll()
-                     .Where(x => x.Person.LastName.Contains(name))
+            var listCustomersDTO = _context.FilterByLastName(name)
                      .Select(x => new CustomerWithTotalDueDTO
                      {
                          FirstName = x.Person.FirstName,
@@ -165,7 +159,7 @@ namespace AdventureWorks.BLL
 
         IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterByAccountNumber(string name)
         {
-            var listCustomersDTO = _context.GetAll()
+            var listCustomersDTO = _context.FilterByAccountNumber(name)
                 .Where(x => x.AccountNumber.Contains(name))
                 .Select(x => new CustomerWithTotalDueDTO
                 {
@@ -176,6 +170,47 @@ namespace AdventureWorks.BLL
                     x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
                 })
                 .ToList();
+
+            return listCustomersDTO;
+        }
+
+        //IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterBystringAttribute(string name,string attribute)
+        //{
+        //    var listCustomersDTO = _context
+
+        //              .FilterByLastName(name)
+        //             .Select(x => new CustomerWithTotalDueDTO
+        //             {
+        //                 FirstName = x.Person.FirstName,
+        //                 LastName = x.Person.LastName,
+        //                 AccountNumber = x.AccountNumber,
+        //                 SumOfTotalDue = //CalculateTotalDue(x)
+        //                 x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
+        //             })
+        //             .ToList();
+
+        //    return listCustomersDTO;
+        //}
+
+
+        public decimal CalculateTotalDue(Customer c)
+        {
+            decimal sum = c.SalesOrderHeaders.Count != 0 ? (decimal)c.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0;
+            return sum;
+        }
+
+        public IEnumerable<CustomerWithTotalDueDTO> FilterByStringAndAttribute(string search, string attribute)
+        {
+          var listCustomersDTO = _context.FilterByStringAndAttribute(search,attribute)
+            .Select(x => new CustomerWithTotalDueDTO
+            {
+                FirstName = x.Person.FirstName,
+                LastName = x.Person.LastName,
+                AccountNumber = x.AccountNumber,
+                SumOfTotalDue = //CalculateTotalDue(x)
+                x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
+            })
+            .ToList();
 
             return listCustomersDTO;
         }

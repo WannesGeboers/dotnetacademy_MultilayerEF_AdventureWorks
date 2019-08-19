@@ -14,5 +14,6 @@ namespace AdventureWorks.BLL.Services.interfaces
         IEnumerable<CustomerWithTotalDueDTO> FilterByLastName(string name);
         IEnumerable<CustomerWithTotalDueDTO> FilterByAccountNumber(string name);
 
+        IEnumerable<CustomerWithTotalDueDTO> FilterByStringAndAttribute(string search, string attribute);
     }
 }

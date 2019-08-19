@@ -89,31 +89,49 @@ namespace AdventureWorksWinForms.UI
             {
                 //selected in combobox
                 var selectedComboValue = comboBox1.Text;
-                switch (selectedComboValue)
-                {
-                    case "SumOfTotalDue":
-                        char first = text[0];
-                        if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
-                        {
-                            var numbTest = text.Replace(first.ToString(), "").Trim();
-                            if (decimal.TryParse(numbTest, out decimal result) == true)
-                            {
-                                data = _customerService.FilterByTotalDue(first, result);
-                            }
-                        }
-                        break;
-                    case "FirstName":
-                        data = _customerService.FilterByFirstName(text);
-                        break;
+                //switch (selectedComboValue)
+                //{
+                //    case "SumOfTotalDue":
+                //        char first = text[0];
+                //        if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
+                //        {
+                //            var numbTest = text.Replace(first.ToString(), "").Trim();
+                //            if (decimal.TryParse(numbTest, out decimal result) == true)
+                //            {
+                //                data = _customerService.FilterByTotalDue(first, result);
+                //            }
+                //        }
+                //        break;
+                //    case "FirstName":
+                //        data = _customerService.FilterByFirstName(text);
+                //        break;
 
-                    case "LastName":
-                        data = _customerService.FilterByLastName(text);
-                        break;
-                    case "AccountNumber":
-                        data = _customerService.FilterByAccountNumber(text);
-                        break;
-                    default:
-                        break;
+                //    case "LastName":
+                //        data = _customerService.FilterByLastName(text);
+                //        break;
+                //    case "AccountNumber":
+                //        data = _customerService.FilterByAccountNumber(text);
+                //        break;
+                //    default:
+                //        break;
+                //}
+
+
+                if (selectedComboValue=="SumOfTotalDue")
+                {
+                    char first = text[0];
+                    if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
+                    {
+                        var numbTest = text.Replace(first.ToString(), "").Trim();
+                        if (decimal.TryParse(numbTest, out decimal result) == true)
+                        {
+                            data = _customerService.FilterByTotalDue(first, result);
+                        }
+                    }                   
+                }
+                else
+                {
+                    data = _customerService.FilterByStringAndAttribute(text, selectedComboValue);
                 }
             }
 
