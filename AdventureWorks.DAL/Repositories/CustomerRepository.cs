@@ -7,29 +7,36 @@ namespace AdventureWorks.DAL
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private AWContext _context { get; set; }
+        private  AWContext _context { get; }
 
 
         public CustomerRepository(AWContext context)
         {
+            //nullcheck
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+        
 
-
-        //public IQueryable GetAll()
-        //{
-        //    
-        //}
 
         public Customer GetByID(int id)
         {
-            throw new System.NotImplementedException();
+            return
+                _context.Customers
+                .Include("Person")
+                .Include("SalesOrderHeaders")
+                .Where(x => x.CustomerID == id)
+                //firstOrDefault zou bij eventuele dubbels fouten kunnen geven
+                //maar een id zou geen dubbele waarden mogen bevatten                
+                .SingleOrDefault();
+
         }
 
         public IQueryable<Customer> GetAll()
-        {
-            var customers = _context.Customers.Include("Person").Include("SalesOrderHeaders");
-            
+        {            
+            var customers = 
+                _context.Customers
+                .Include("Person")
+                .Include("SalesOrderHeaders");            
             return customers;
         }
     }
