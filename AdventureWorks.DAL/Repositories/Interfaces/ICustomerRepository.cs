@@ -8,9 +8,9 @@ namespace AdventureWorks.DAL.Interfaces
         Customer GetByID(int id);
        
         IQueryable<Customer> GetAll();
-        IEnumerable<Customer> FilterByFirstName(string name);
-        IEnumerable<Customer> FilterByLastName(string name);
-        IEnumerable<Customer> FilterByAccountNumber(string name);
+        //IEnumerable<Customer> FilterByFirstName(string name);
+        //IEnumerable<Customer> FilterByLastName(string name);
+        //IEnumerable<Customer> FilterByAccountNumber(string name);
         IEnumerable<Customer> FilterByStringAndAttribute(string search, string attribute);
 
     }

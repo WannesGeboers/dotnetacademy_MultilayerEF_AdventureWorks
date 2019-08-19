@@ -10,9 +10,9 @@ namespace AdventureWorks.BLL.Services.interfaces
         IEnumerable<CustomerWithTotalDueDTO> GetAllCustomersWithTotalDue();
         IEnumerable<CustomerWithTotalDueDTO> GetAllCustomersAverage(char c);
         IEnumerable<CustomerWithTotalDueDTO> FilterByTotalDue(char c, decimal number);
-        IEnumerable<CustomerWithTotalDueDTO> FilterByFirstName(string name);
-        IEnumerable<CustomerWithTotalDueDTO> FilterByLastName(string name);
-        IEnumerable<CustomerWithTotalDueDTO> FilterByAccountNumber(string name);
+        //IEnumerable<CustomerWithTotalDueDTO> FilterByFirstName(string name);
+        //IEnumerable<CustomerWithTotalDueDTO> FilterByLastName(string name);
+        //IEnumerable<CustomerWithTotalDueDTO> FilterByAccountNumber(string name);
 
         IEnumerable<CustomerWithTotalDueDTO> FilterByStringAndAttribute(string search, string attribute);
     }

@@ -36,38 +36,38 @@ namespace AdventureWorks.DAL
         }
 
 
-        public IEnumerable<Customer> FilterByFirstName(string name)
-        {
-                var customers =
-                    _context.Customers
-                    .Include("Person")
-                    .Include("SalesOrderHeaders")
-                    .Where(x=>x.Person.FirstName.Contains(name))
-                    .ToList();
-                return customers;
-        }
+        //public IEnumerable<Customer> FilterByFirstName(string name)
+        //{
+        //        var customers =
+        //            _context.Customers
+        //            .Include("Person")
+        //            .Include("SalesOrderHeaders")
+        //            .Where(x=>x.Person.FirstName.Contains(name))
+        //            .ToList();
+        //        return customers;
+        //}
 
-        public IEnumerable<Customer> FilterByLastName(string name)
-        {
-            var customers =
-                _context.Customers
-                .Include("Person")
-                .Include("SalesOrderHeaders")
-                .Where(x => x.Person.LastName.Contains(name))
-                .ToList();
-            return customers;
-        }
+        //public IEnumerable<Customer> FilterByLastName(string name)
+        //{
+        //    var customers =
+        //        _context.Customers
+        //        .Include("Person")
+        //        .Include("SalesOrderHeaders")
+        //        .Where(x => x.Person.LastName.Contains(name))
+        //        .ToList();
+        //    return customers;
+        //}
 
-        public IEnumerable<Customer> FilterByAccountNumber(string name)
-        {
-            var customers =
-                _context.Customers
-                .Include("Person")
-                .Include("SalesOrderHeaders")
-                .Where(x => x.AccountNumber.Contains(name))
-                .ToList();
-            return customers;
-        }
+        //public IEnumerable<Customer> FilterByAccountNumber(string name)
+        //{
+        //    var customers =
+        //        _context.Customers
+        //        .Include("Person")
+        //        .Include("SalesOrderHeaders")
+        //        .Where(x => x.AccountNumber.Contains(name))
+        //        .ToList();
+        //    return customers;
+        //}
 
         public IEnumerable<Customer> FilterByStringAndAttribute(string search,string attribute)
         {
@@ -83,15 +83,15 @@ namespace AdventureWorks.DAL
             switch (attribute)
             {
                 case "FirstName":
-                    customers = customers.Where(x => x.Person.FirstName.Contains(search))
+                    customers = customers.Where(x => x.Person.FirstName.ToUpper().Contains(search.ToUpper()))
                                         .OrderBy(x=>x.Person.FirstName);
                     break;
                 case "LastName":
-                    customers = customers.Where(x => x.Person.LastName.Contains(search))
+                    customers = customers.Where(x => x.Person.LastName.ToUpper().Contains(search.ToUpper()))
                              .OrderBy(x => x.Person.LastName);
                     break;
                 case "AccountNumber":
-                    customers = customers.Where(x => x.AccountNumber.Contains(search))
+                    customers = customers.Where(x => x.AccountNumber.ToUpper().Contains(search.ToUpper()))
                                  .OrderBy(x => x.AccountNumber);
                     break;
                 default:
