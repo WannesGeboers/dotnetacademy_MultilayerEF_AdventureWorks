@@ -67,30 +67,7 @@ namespace AdventureWorks.BLL.Services
             return listCustomersDTO;
         }
 
-        //public List<CustomerWithTotalDueDTO> FilterByTotalDue(string text)
-        //{
-        //    if (string.IsNullOrEmpty(text) == true)
-        //    {
-        //        return GetAll().ToList();
-        //    }
-        //    else
-        //    {                        
 
-        //            char first = text[0];
-        //            if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
-        //            {
-        //                var numbTest = text.Replace(first.ToString(), "").Trim();
-        //                if (decimal.TryParse(numbTest, out decimal result) == true)
-        //                {
-        //                    var data = _customerService.GetByTotalDue(first, result);
-        //                    DisplayData(data);
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //        }
-        //    }
 
 
 

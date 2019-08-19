@@ -5,6 +5,7 @@ using AdventureWorks.DAL;
 using AdventureWorks.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -28,7 +29,7 @@ namespace AdventureWorksWinForms.UI
 
         private void InitialLoadApplication()
         {
-            var context = new AWContext();               
+            var context = new AWContext();
             ICustomerRepository customerRepository = new CustomerRepository(context);
             _customerService = new CustomerService(customerRepository);
         }
@@ -55,6 +56,8 @@ namespace AdventureWorksWinForms.UI
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = data;
             GiveRowNumber(dataGridView1);
+            lblRows.Text = "Number of rows:" + dataGridView1.RowCount.ToString();
+
         }
 
 
@@ -69,18 +72,18 @@ namespace AdventureWorksWinForms.UI
 
 
         private void Button1_Click(object sender, EventArgs e)
-        {           
+        {
             DisplayData(_data);
         }
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
             string text = textBox1.Text;
-          IEnumerable<CustomerWithTotalDueDTO> data = null;
+            IEnumerable<CustomerWithTotalDueDTO> data = null;
 
-            if (string.IsNullOrEmpty(text)==true)
+            if (string.IsNullOrEmpty(text) == true)
             {
-                data = _customerService.GetAllCustomersWithTotalDue();                
+                data = _customerService.GetAllCustomersWithTotalDue();
             }
             else
             {
@@ -111,7 +114,7 @@ namespace AdventureWorksWinForms.UI
                         break;
                     default:
                         break;
-                }               
+                }
             }
 
             DisplayData(data);
@@ -125,13 +128,13 @@ namespace AdventureWorksWinForms.UI
         private void BtnHigher_Click(object sender, EventArgs e)
         {
             var data = _customerService.GetAllCustomersAverage('>');
-            DisplayData(data); 
+            DisplayData(data);
         }
 
         private void BtnLower_Click(object sender, EventArgs e)
         {
-          var data = _customerService.GetAllCustomersAverage('<');
-          DisplayData(data);
+            var data = _customerService.GetAllCustomersAverage('<');
+            DisplayData(data);
         }
 
 
@@ -165,5 +168,11 @@ namespace AdventureWorksWinForms.UI
         {
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+

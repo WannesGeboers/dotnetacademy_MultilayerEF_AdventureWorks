@@ -41,7 +41,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotalDueEx = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblRows = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -173,14 +173,14 @@
             this.lblTotalDueEx.Visible = false;
             this.lblTotalDueEx.Click += new System.EventHandler(this.Label2_Click);
             // 
-            // label2
+            // lblRows
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(741, 1065);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 32);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "label2";
+            this.lblRows.AutoSize = true;
+            this.lblRows.Location = new System.Drawing.Point(741, 1065);
+            this.lblRows.Name = "lblRows";
+            this.lblRows.Size = new System.Drawing.Size(82, 32);
+            this.lblRows.TabIndex = 9;
+            this.lblRows.Text = "rows:";
             // 
             // Form1
             // 
@@ -188,7 +188,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2100, 1167);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblRows);
             this.Controls.Add(this.lblTotalDueEx);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -200,6 +200,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -221,7 +222,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTotalDueEx;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblRows;
     }
 }
 
