@@ -11,6 +11,7 @@ namespace AdventureWorks.BLL
     public class CustomerService : ICustomerService
 
     {
+
         private readonly ICustomerRepository _context;
 
         public CustomerService(ICustomerRepository context)
@@ -52,10 +53,11 @@ namespace AdventureWorks.BLL
                      FirstName = x.Person != null ? x.Person.FirstName : "",
                      LastName = x.Person != null ? x.Person.LastName : "",
                      AccountNumber = x.AccountNumber,
-                     SumOfTotalDue = x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
-                 }).ToList();
+                     SumOfTotalDue = //CalculateTotalDue(x)
+                     x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
+                 });
 
-            return allCustomersWithTotalDue;
+            return allCustomersWithTotalDue.ToList();
         }
 
         public IEnumerable<CustomerWithTotalDueDTO> GetAllCustomersAverage(char c)
@@ -88,9 +90,9 @@ namespace AdventureWorks.BLL
         }
 
 
-        public IEnumerable<CustomerWithTotalDueDTO> GetByTotalDue(char c,decimal number)
+        public IEnumerable<CustomerWithTotalDueDTO> FilterByTotalDue(char c, decimal number)
         {
-            var data = _context.GetAll().AsEnumerable();          
+            var data = _context.GetAll().AsEnumerable();
 
             data = data.Where(x => x.Person != null);
 
@@ -116,9 +118,66 @@ namespace AdventureWorks.BLL
             })
                 .OrderBy(x => x.SumOfTotalDue)
                 .ToList();
-
             return resultDTO;
         }
 
+
+
+        public decimal CalculateTotalDue(Customer c)
+        {
+            decimal sum = c.SalesOrderHeaders.Count != 0 ? (decimal)c.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0;
+            return sum;
+        }
+
+        IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterByFirstName(string name)
+        {
+            var listCustomersDTO = _context.GetAll()
+                  .Where(x => x.Person.FirstName.Contains(name))
+                  .Select(x => new CustomerWithTotalDueDTO
+                  {
+                      FirstName = x.Person.FirstName,
+                      LastName = x.Person.LastName,
+                      AccountNumber = x.AccountNumber,
+                      SumOfTotalDue = //CalculateTotalDue(x)
+                      x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
+                  })
+                  .ToList();
+
+            return listCustomersDTO;
+        }
+
+        IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterByLastName(string name)
+        {
+            var listCustomersDTO = _context.GetAll()
+                     .Where(x => x.Person.LastName.Contains(name))
+                     .Select(x => new CustomerWithTotalDueDTO
+                     {
+                         FirstName = x.Person.FirstName,
+                         LastName = x.Person.LastName,
+                         AccountNumber = x.AccountNumber,
+                         SumOfTotalDue = //CalculateTotalDue(x)
+                         x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
+                     })
+                     .ToList();
+
+            return listCustomersDTO;
+        }
+
+        IEnumerable<CustomerWithTotalDueDTO> ICustomerService.FilterByAccountNumber(string name)
+        {
+            var listCustomersDTO = _context.GetAll()
+                .Where(x => x.AccountNumber.Contains(name))
+                .Select(x => new CustomerWithTotalDueDTO
+                {
+                    FirstName = x.Person.FirstName,
+                    LastName = x.Person.LastName,
+                    AccountNumber = x.AccountNumber,
+                    SumOfTotalDue = //CalculateTotalDue(x)
+                    x.SalesOrderHeaders.Count != 0 ? (decimal)x.SalesOrderHeaders.Sum(y => y.TotalDue) : (decimal)0
+                })
+                .ToList();
+
+            return listCustomersDTO;
+        }
     }
 }

@@ -12,5 +12,9 @@ namespace AdventureWorks.BLL.Services.interfaces
         CustomerWithTotalDueDTO GetByID(int id);
         IQueryable<CustomerWithTotalDueDTO> GetAll();
 
+ 
+
+
+
     }
 }

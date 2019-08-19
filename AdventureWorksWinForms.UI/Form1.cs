@@ -35,8 +35,8 @@ namespace AdventureWorksWinForms.UI
 
         private void LoadStartData()
         {
-            var data = _customerService.GetAllCustomersWithTotalDue();
-            DisplayData(data);
+            _data = _customerService.GetAllCustomersWithTotalDue();
+            DisplayData(_data);
         }
 
         private void LoadComboBox()
@@ -71,45 +71,53 @@ namespace AdventureWorksWinForms.UI
         private void Button1_Click(object sender, EventArgs e)
         {           
             DisplayData(_data);
-
         }
 
         private void Button1_Click_1(object sender, EventArgs e)
         {
             string text = textBox1.Text;
+          IEnumerable<CustomerWithTotalDueDTO> data = null;
 
             if (string.IsNullOrEmpty(text)==true)
             {
-                var data = _customerService.GetAllCustomersWithTotalDue();
-                DisplayData(data);
+                data = _customerService.GetAllCustomersWithTotalDue();                
             }
             else
             {
                 //selected in combobox
                 var selectedComboValue = comboBox1.Text;
-                if (selectedComboValue.Equals("SumOfTotalDue") == true)
+                switch (selectedComboValue)
                 {
-                    char first = text[0];
-                    if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
-                    {
-                        var numbTest = text.Replace(first.ToString(), "").Trim();
-                        if (decimal.TryParse(numbTest, out decimal result) == true)
+                    case "SumOfTotalDue":
+                        char first = text[0];
+                        if (first.Equals('=') || first.Equals('<') || first.Equals('>') == true)
                         {
-                            var data = _customerService.GetByTotalDue(first, result);
-                            DisplayData(data);
+                            var numbTest = text.Replace(first.ToString(), "").Trim();
+                            if (decimal.TryParse(numbTest, out decimal result) == true)
+                            {
+                                data = _customerService.FilterByTotalDue(first, result);
+                            }
                         }
-                    }
-                }
-                else
-                {
+                        break;
+                    case "FirstName":
+                        data = _customerService.FilterByFirstName(text);
+                        break;
 
-                }
+                    case "LastName":
+                        data = _customerService.FilterByLastName(text);
+                        break;
+                    case "AccountNumber":
+                        data = _customerService.FilterByAccountNumber(text);
+                        break;
+                    default:
+                        break;
+                }               
             }
 
+            DisplayData(data);
 
-            
 
-            
+
 
         }
 
@@ -135,12 +143,25 @@ namespace AdventureWorksWinForms.UI
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            var res = (ComboBox)sender;
+            if (res.Text.Equals("SumOfTotalDue"))
+            {
+                lblTotalDueEx.Visible = true;
+            }
+            else
+            {
+                lblTotalDueEx.Visible = false;
+            }
         }
 
 
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Label2_Click(object sender, EventArgs e)
         {
 
         }

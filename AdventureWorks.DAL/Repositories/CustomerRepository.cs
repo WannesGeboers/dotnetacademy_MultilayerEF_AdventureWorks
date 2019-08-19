@@ -7,16 +7,14 @@ namespace AdventureWorks.DAL
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private  AWContext _context { get; }
-
+        private AWContext _context { get; }
+        
 
         public CustomerRepository(AWContext context)
         {
             //nullcheck
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-        }
-        
-
+            _context = context ?? throw new ArgumentNullException(nameof(context));            
+        }    
 
         public Customer GetByID(int id)
         {
@@ -24,11 +22,8 @@ namespace AdventureWorks.DAL
                 _context.Customers
                 .Include("Person")
                 .Include("SalesOrderHeaders")
-                .Where(x => x.CustomerID == id)
-                //firstOrDefault zou bij eventuele dubbels fouten kunnen geven
-                //maar een id zou geen dubbele waarden mogen bevatten                
+                .Where(x => x.CustomerID == id)           
                 .SingleOrDefault();
-
         }
 
         public IQueryable<Customer> GetAll()
@@ -39,5 +34,7 @@ namespace AdventureWorks.DAL
                 .Include("SalesOrderHeaders");            
             return customers;
         }
+
+        
     }
 }

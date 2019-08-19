@@ -39,6 +39,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblTotalDueEx = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +55,7 @@
             this.LastName,
             this.AccountNumber,
             this.SumOfTotalDue});
-            this.dataGridView1.Location = new System.Drawing.Point(108, 106);
+            this.dataGridView1.Location = new System.Drawing.Point(91, 106);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridView1.RowHeadersWidth = 102;
@@ -150,12 +153,44 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click_1);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(456, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(819, 69);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "AdventureWorks: Customers";
+            // 
+            // lblTotalDueEx
+            // 
+            this.lblTotalDueEx.Location = new System.Drawing.Point(1856, 735);
+            this.lblTotalDueEx.Name = "lblTotalDueEx";
+            this.lblTotalDueEx.Size = new System.Drawing.Size(224, 146);
+            this.lblTotalDueEx.TabIndex = 8;
+            this.lblTotalDueEx.Text = "< > = [number] ex. <666";
+            this.lblTotalDueEx.Visible = false;
+            this.lblTotalDueEx.Click += new System.EventHandler(this.Label2_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(741, 1065);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 32);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(2100, 1042);
+            this.ClientSize = new System.Drawing.Size(2100, 1167);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblTotalDueEx);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
@@ -184,6 +219,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTotalDueEx;
+        private System.Windows.Forms.Label label2;
     }
 }
 
